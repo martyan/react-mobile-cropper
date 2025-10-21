@@ -16,6 +16,8 @@ export interface PublicNavigationProps {
 	activeBarClassName?: string;
 	zeroBarClassName?: string;
 	valueBarClassName?: string;
+	hideFlipButtons?: boolean;
+	rotationLimit?: number;
 }
 
 interface NavigationProps extends PublicNavigationProps {
@@ -45,6 +47,8 @@ export const Navigation = forwardRef<NavigationRef, NavigationProps>(
 			highlightedBarClassName,
 			zeroBarClassName,
 			valueBarClassName,
+			hideFlipButtons,
+			rotationLimit = 45,
 			disabled,
 			value,
 			onRotate,
@@ -135,9 +139,11 @@ export const Navigation = forwardRef<NavigationRef, NavigationProps>(
 
 		return (
 			<div className={cn('rmc-navigation', className)}>
-				<button type="button" className={cn('rmc-navigation__button', buttonClassName)} onClick={flipHorizontal}>
-					<FlipHorizontalIcon />
-				</button>
+				{!hideFlipButtons && (
+					<button type="button" className={cn('rmc-navigation__button', buttonClassName)} onClick={flipHorizontal}>
+						<FlipHorizontalIcon />
+					</button>
+				)}
 				<button type="button" className={cn('rmc-navigation__button', buttonClassName)} onClick={rotateRight}>
 					<RotateRightIcon />
 				</button>
@@ -150,16 +156,18 @@ export const Navigation = forwardRef<NavigationRef, NavigationProps>(
 					highlightedBarClassName={highlightedBarClassName}
 					onChange={rotateTo}
 					onBlur={onRotateEnd}
-					from={-45}
-					to={45}
+					from={-rotationLimit}
+					to={rotationLimit}
 					value={adjustmentAngle}
 				/>
 				<button type="button" className={cn('rmc-navigation__button', buttonClassName)} onClick={rotateLeft}>
 					<RotateLeftIcon />
 				</button>
-				<button type="button" className={cn('rmc-navigation__button', buttonClassName)} onClick={flipVertical}>
-					<FlipVerticalIcon />
-				</button>
+				{!hideFlipButtons && (
+					<button type="button" className={cn('rmc-navigation__button', buttonClassName)} onClick={flipVertical}>
+						<FlipVerticalIcon />
+					</button>
+				)}
 			</div>
 		);
 	},

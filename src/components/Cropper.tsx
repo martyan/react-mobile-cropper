@@ -29,6 +29,7 @@ export interface CropperProps
 	navigation?: boolean;
 	navigationProps?: PublicNavigationProps;
 	imageRestriction?: ImageRestriction.none | ImageRestriction.stencil;
+	minCroppedSize?: number;
 }
 
 export const Cropper = forwardRef((props: CropperProps, ref) => {
@@ -40,6 +41,7 @@ export const Cropper = forwardRef((props: CropperProps, ref) => {
 		navigationProps = {},
 		wrapperComponent,
 		imageRestriction = ImageRestriction.stencil,
+		minCroppedSize,
 		...cropperProps
 	} = props;
 
@@ -70,6 +72,8 @@ export const Cropper = forwardRef((props: CropperProps, ref) => {
 			transitions={true}
 			postProcess={imageRestriction === ImageRestriction.none ? zoomStencil : [fitStencilToImage, zoomStencil]}
 			resizeCoordinatesAlgorithm={imageRestriction === ImageRestriction.none ? undefined : resizeCoordinates}
+			minWidth={minCroppedSize}
+			minHeight={minCroppedSize}
 		/>
 	);
 });

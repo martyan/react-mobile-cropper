@@ -54,6 +54,8 @@ export const CropperWrapper: FC<CropperWrapperProps<CropperRef>> = ({
 						valueBarClassName={navigationProps.valueBarClassName}
 						zeroBarClassName={navigationProps.zeroBarClassName}
 						highlightedBarClassName={navigationProps.highlightedBarClassName}
+						hideFlipButtons={navigationProps.hideFlipButtons}
+						rotationLimit={navigationProps.rotationLimit}
 						disabled={transitions.active}
 					/>
 				)}

@@ -58,6 +58,7 @@ export const Cropper = forwardRef((props: CropperProps, ref) => {
 				grid: true,
 				...stencilProps,
 				movable: false,
+				resizable: false,
 			}}
 			wrapperComponent={WrapperComponent}
 			wrapperProps={{
